@@ -1,0 +1,20 @@
+mymodule.batch_file_upload_form:
+  title: 'Batch'
+  description: Task Form
+  route_name: mymodule.batch_file_upload_form
+  weight: 10
+  parent: system.admin
+ 
+mymodule.queue_file_upload_form:
+  title: 'Queue'
+  description: Task Form2
+  route_name: mymodule.queue_file_upload_form
+  weight: 10
+  parent: system.admin
+
+mymodule.settings:
+  title: 'Config Form'
+  description: Config Form
+  route_name: mymodule.settings
+  weight: 10
+  parent: system.admin

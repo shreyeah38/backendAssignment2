@@ -1,0 +1,38 @@
+mymodule.batch_file_upload_form:
+  path: '/batch-file-upload-form'
+  defaults:
+    _form: '\Drupal\mymodule\Form\BatchFileUploadForm'
+    _title: 'Batch File Upload'
+  requirements:
+    _permission: 'access content'
+ 
+
+mymodule.queue_file_upload_form:
+  path: '/queue-file-upload-form'
+  defaults:
+    _form: '\Drupal\mymodule\Form\SimpleForm'
+    _title: 'Queue File Upload'
+  requirements:
+    _permission: 'access content'
+ 
+mymodule.settings:
+  path: '/admin/config/my-module/settings'
+  defaults:
+    _form: '\Drupal\mymodule\Form\MyModuleSettingsForm'
+    _title: 'My Module Settings'
+  requirements:
+    _permission: 'administer site configuration'
+
+mymodule.upload_csv:
+  path: '/api/upload-csv'
+  defaults:
+    _controller: '\Drupal\mymodule\Controller\CsvUploadController::uploadCsv'
+    _title: 'Upload CSV'
+  methods: ['POST']
+  requirements:
+    _permission: 'access content'
+    _role: 'administrator'
+    _format: 'json'
+  options: 
+    _auth: ['basic_auth']
+

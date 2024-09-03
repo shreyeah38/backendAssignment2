@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * Implements hook_cron().
+ */
+function mymodule_cron() {
+  // Log available queue worker plugins.
+  \Drupal::logger('mymodule')->info('Available queue workers: @workers', [
+    '@workers' => implode(', ', array_keys(\Drupal::service('plugin.manager.queue_worker')->getDefinitions()))
+  ]);
+
+  // Get the queue.
+  $queue = \Drupal::queue('csv_row_processor');
+
+  // Process all items in the queue.
+  while ($item = $queue->claimItem()) {
+    try {
+      // Process the item.
+      \Drupal::service('plugin.manager.queue_worker')->createInstance('csv_row_processor')->processItem($item->data);
+
+      // Delete the item after successful processing.
+      $queue->deleteItem($item);
+    } catch (\Exception $e) {
+      // If there is an error, release the item so it can be processed again.
+      $queue->releaseItem($item);
+
+      // Log the exception.
+      \Drupal::logger('mymodule')->error('Failed to process CSV row: @message', ['@message' => $e->getMessage()]);
+    }
+  }
+}

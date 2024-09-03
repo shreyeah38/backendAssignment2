@@ -1,0 +1,12 @@
+name: My Module
+type: module
+core_version_requirement: 10.3.1
+description: Assignment 1, Module Dev
+package: My Module
+
+dependencies: 
+  - drupal:block
+  - drupal:node
+  - drupal:config
+
+configure: mymodule.admin_settings

@@ -1,0 +1,5 @@
+services:
+  mymodule.csv_row_processor:
+    class: Drupal\mymodule\Plugin\QueueWorker\ProcessCsvRow
+    tags:
+      - { name: queue_worker, id: csv_row_processor, title: 'CSV Row Processor', cron: 60 }
